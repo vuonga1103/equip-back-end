@@ -19,6 +19,9 @@ gem 'bcrypt', '~> 3.1.7'
 # To integrate Cloudinary for image uploads
 gem 'cloudinary'
 
+# For serializer use (allowing you to structure JSON key-value pairs according to how you want the info to be sent out)
+gem 'active_model_serializers'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
