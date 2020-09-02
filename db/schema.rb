@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2020_09_02_222847) do
     t.string "password_digest"
     t.string "city"
     t.string "state"
-    t.string "zip"
+    t.integer "zip"
     t.string "email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
