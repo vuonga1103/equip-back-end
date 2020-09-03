@@ -22,6 +22,8 @@ gem 'cloudinary'
 # For serializer use (allowing you to structure JSON key-value pairs according to how you want the info to be sent out)
 gem 'active_model_serializers'
 
+# For JWT auth
+gem 'jwt'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
