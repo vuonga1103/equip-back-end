@@ -1,8 +1,8 @@
 class ItemsController < ApplicationController
   def index
-    items = Item.all
+    available_items = Item.all.select { |i| !i.sold }
 
-    render json: items
+    render json: available_items 
   end
 
   def show

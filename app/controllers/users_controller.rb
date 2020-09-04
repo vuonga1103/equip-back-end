@@ -17,7 +17,6 @@ class UsersController < ApplicationController
 
   def persist
     # we have access to @user here thanks to application#authorized and all the helper functions defined in ApplicationController, we use it to encode the user's id into a token, and send back the user and the token
-
     token = encode_token({user_id: @user.id})
     render json: {user: UserSerializer.new(@user), token: token}
   end

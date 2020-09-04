@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  has_many :items
+  has_many :items, dependent: :destroy
   has_secure_password
 
   validates :email, uniqueness: { case_sensitive: false }

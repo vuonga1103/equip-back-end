@@ -45,6 +45,7 @@ item1 = Item.create(
   shipping: true,
   category: "Wheelchairs & Scooters",
   photo: "https://cdn.fsastore.com/ProductImages/Large/423104_1.jpg",
+  sold: false,
   user: anh
 )
 
@@ -57,6 +58,7 @@ item2 = Item.create(
   shipping: false,
   category: "Walking Aids",
   photo: "https://images-na.ssl-images-amazon.com/images/I/71CkSkJeuDL.__AC_SY300_QL70_ML2_.jpg",
+  sold: false,
   user: fluffy
 )
 
@@ -69,6 +71,7 @@ item3 = Item.create(
   shipping: false,
   category: "Walking Aids",
   photo: "https://cdns.webareacontrol.com/prodimages/1000-X-1000/2/e/24220171758Field-Lumex-Bariatric-Quad-Cane-L.png",
+  sold: false,
   user: misty
 )
 
