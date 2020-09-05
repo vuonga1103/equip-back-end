@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :authorized, only: [:persist]
+  before_action :authorized, only: [:persist, :user_items]
 
   def login
     @user = User.find_by(username: params[:username])
@@ -34,7 +34,13 @@ class UsersController < ApplicationController
 
   end
 
+  def user_items
+    items = @user.items
+    render json: items
+  end
+
   private
+  
   def user_params
     params.permit(:username, :password, :city, :state, :zip, :email)
   end

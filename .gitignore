@@ -28,3 +28,6 @@
 
 # Ignore JWT secret
 /config/local_env.yml
+
+# Ignore Cloudinary
+/config/initializers/cloudinary.rb
