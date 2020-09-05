@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   post '/login', to: 'users#login'
   get '/persist', to: 'users#persist'
   get '/user-items', to: 'users#user_items'
-  post '/post-photo', to: 'items#post_photo'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

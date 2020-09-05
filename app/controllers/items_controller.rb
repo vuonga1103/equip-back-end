@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authorized, only: [:create, :post_photo]
+  before_action :authorized, only: [:create]
 
   def index
     available_items = Item.all.select { |i| !i.sold }
@@ -22,15 +22,10 @@ class ItemsController < ApplicationController
 
   def create
     item = @user.items.create(item_params)
-    render json: item
-  end
 
-  def post_photo
-    item = @user.items.last
-
-    photo = Cloudinary::Uploader.upload(params[:photo])
-
-    item.update(photo: photo['url'])
+    photo = Cloudinary::Uploader.upload(params[:photo]) 
+    
+    item.update(photo: photo['url'], sold: false)
 
     render json: item
   end
