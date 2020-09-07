@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :authorized, only: [:create]
+  before_action :authorized, only: [:update, :create]
 
   def index
     available_items = Item.all.select { |i| !i.sold }
@@ -15,9 +15,14 @@ class ItemsController < ApplicationController
 
   def update
     @item = Item.find_by(id: params[:id])
-    @item.update(sold: params[:sold])
-    
-    render json: @item
+
+    if @user.items.include?(@item)
+      @item.update(sold: params[:sold])
+      render json: @item
+    else
+      render json: { error: "You do no have permission to do this"}
+    end
+
   end
 
   def create
@@ -32,7 +37,7 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.permit(:name, :description, :condition, :price, :pickup, :shipping, :category, :photo)
+    params.permit(:name, :description, :condition, :price, :pickup, :shipping, :category, :photo, :latitude, :longitude)
   end
 
 end
