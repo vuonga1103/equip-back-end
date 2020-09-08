@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  # Before methods persist() and user_items() get called, Application#authorized() is ran; in Application#authorized(), we decode the token passed in via the request's header, find the user associated with the decoded token, and set the instance var of @user to that user. So therefore in persist() and user_items(), we have access to @user which is the user authorized. 
-  before_action :authorized, only: [:persist, :user_items]
+  # Before the below methods  get called, Application#authorized() is ran; in Application#authorized(), we decode the token passed in via the request's header, find the user associated with the decoded token, and set the instance var of @user to that user. So therefore in the below methods we have access to @user which is the user authorized. 
+  before_action :authorized, only: [:persist, :user_items, :update, :validate_current_password, :change_password]
 
   def login
     @user = User.find_by(username: params[:username])
@@ -41,6 +41,33 @@ class UsersController < ApplicationController
   def user_items
     items = @user.items
     render json: items
+  end
+
+  def update
+    if @user.update(user_params)
+      token = encode_token({user_id: @user.id})
+      render json: { user: UserSerializer.new(@user), token: token }
+    else
+      render json: {error: @user.errors.full_messages}
+    end
+  end
+
+  def validate_current_password
+    
+    if @user.authenticate(params[:password])
+      render json: @user
+    else 
+      render json: {error: "Invalid current password"}
+    end
+  end
+
+  def change_password
+    if @user.update(password: params[:password])
+      render json: @user
+    else
+      render json: {error: "Could not change password"}
+    end
+
   end
 
   private
