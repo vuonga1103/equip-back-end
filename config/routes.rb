@@ -9,5 +9,9 @@ Rails.application.routes.draw do
   post '/validate-current-password', to: 'users#validate_current_password'
   post '/change-password', to: 'users#change_password'
 
+  # get 'items/page/:page', to: 'items#specific_amounts'
+
+  
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
