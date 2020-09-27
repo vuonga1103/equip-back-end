@@ -40,4 +40,4 @@ This is the Ruby on Rails API for Equip. Equip is an online marketplace where us
     $ rails db:seed
 4. Last step, launch the rails server!
 
-    ```$ rails s```
+    ```$ rails s -p 4000```
