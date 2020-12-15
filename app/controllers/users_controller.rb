@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
   # Before the below methods  get called, Application#authorized() is ran; in Application#authorized(), we decode the token passed in via the request's header, find the user associated with the decoded token, and set the instance var of @user to that user. So therefore in the below methods we have access to @user which is the user authorized. 
-  before_action :authorized, only: [:persist, :user_items, :update, :validate_current_password, :change_password]
+  before_action :authorized, only: [:persist, :user_items, :update, :validate_current_password, :change_password, :user_item]
+
+  def welcome
+    render json: "Welcome to the API".to_json
+  end
 
   def login
     @user = User.find_by(username: params[:username])
@@ -68,6 +72,16 @@ class UsersController < ApplicationController
       render json: {error: "Could not change password"}
     end
 
+  end
+
+  def user_item
+    @item = @user.items.find_by(id: params[:id])
+
+    if @item
+      render json: @item
+    else
+      render json: {error: "Item could not be found"}
+    end
   end
 
   private

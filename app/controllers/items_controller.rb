@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
  # Before methods update() and create() get called, Application#authorized() is ran; in Application#authorized(), we decode the token passed in via the request's header, find the user associated with the decoded token, and set the instance var of @user to that user. So therefore in update() and create(), we have access to @user which is the user authorized. 
-  before_action :authorized, only: [:update, :create]
+  before_action :authorized, only: [:update, :create, :destroy, :edit_item]
 
   # Render out all items that have not been sold to display in frontend / page
   def index
@@ -39,6 +39,32 @@ class ItemsController < ApplicationController
 
     # Then we render the item
     render json: item
+  end
+
+  def destroy
+    @item = Item.find_by(id: params[:id])
+    @item.destroy
+
+    render json: @item
+  end
+
+  def edit_item
+    @item = Item.find_by(id: params[:id])
+    if @user.items.include?(@item) 
+      @item.update(item_params)
+
+      
+      if @item.photo.class != "String" 
+        photo = Cloudinary::Uploader.upload(params[:photo]) 
+        @item.update(photo: photo['url'])
+      end
+      render json: @item
+    else 
+      render json: {error: "You don't have permission"}
+    end 
+
+    
+
   end
 
   private

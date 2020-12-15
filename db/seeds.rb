@@ -89,11 +89,11 @@ biscuit = User.create(
 heap = User.create(
   username: "heap",
   password: "heap",
-  city: "Montauk",
-  state: "NY",
-  zip: '11954', 
-  longitude: -71.951,
-  latitude: 41.038,
+  city: "Hackensack",
+  state: "NJ",
+  zip: '07601', 
+  longitude: -74.049,
+  latitude: 40.889,
   email: "heap@heap.com" 
 )
 
